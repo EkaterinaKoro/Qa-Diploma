@@ -1,16 +1,9 @@
 package data;
-
 import com.github.javafaker.Faker;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Value;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
-import static java.lang.String.format;
 
 
 public class DataHelper {
@@ -38,7 +31,7 @@ public class DataHelper {
     private  static Faker fakerRus = new Faker(new Locale("ru"));
 
     public static String getRandomCardNumber() {
-        return DataHelper.faker.business().creditCardNumber();
+        return faker.business().creditCardNumber();
 
     }
 
@@ -52,6 +45,7 @@ public class DataHelper {
 
     public static String getRandomYear(int year) {
         return LocalDate.now().plusYears(year).format(DateTimeFormatter.ofPattern("yy"));
+
     }
 
     public static String getInvalidMonth() {

@@ -16,6 +16,7 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - POSTGRES_DB=app
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=pass

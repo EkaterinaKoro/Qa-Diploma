@@ -8,7 +8,7 @@ import org.junit.jupiter.api.*;
 import page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class PaymentTest {
 
@@ -26,12 +26,6 @@ public class PaymentTest {
 
     }
 
-    @BeforeEach
-    public void setUp() {
-        open("http://localhost:8080");
-
-    }
-
     @BeforeAll
     public static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -40,6 +34,12 @@ public class PaymentTest {
     @AfterAll
     public static void tearDownAll() {
         SelenideLogger.removeListener("allure");
+    }
+
+    @BeforeEach
+    public void setUp() {
+        open("http://localhost:8080");
+
     }
 
     @Test
@@ -66,8 +66,8 @@ public class PaymentTest {
     }
 
 
-@Test
-public void shouldIncorrectPaymentNumber() {
+    @Test
+    public void shouldIncorrectPaymentNumber() {
         PaymentPage page = new PaymentPage();
         page.paymentPage();
         var cardPage = page.cardPayment();
@@ -75,10 +75,10 @@ public void shouldIncorrectPaymentNumber() {
         cardPage.cleanFields();
         cardPage.fillCardPaymentForm(invalidCardNumber, validMonth, validYear, validOwnerName, validCode);
         cardPage.errorFormat();
-}
+    }
 
-@Test
-public void shouldMustBlankFieldCardNumberPayment() {
+    @Test
+    public void shouldMustBlankFieldCardNumberPayment() {
         PaymentPage page = new PaymentPage();
         page.paymentPage();
         var cardPage = page.cardPayment();
@@ -87,20 +87,176 @@ public void shouldMustBlankFieldCardNumberPayment() {
         cardPage.fillCardPaymentForm(emptyCardNumber, validMonth, validYear, validOwnerName, validCode);
         cardPage.errorFormat();
 
-}
-@Test
-    public void paymentByCardWithExpiredMonthlyValidityt() {
+    }
+
+    @Test
+    public void paymentByCardWithExpiredMonthlyValidity() {
         PaymentPage page = new PaymentPage();
         page.paymentPage();
         var cardPage = page.cardPayment();
         var currentYear = DataHelper.getRandomYear(0);
-        var monthExpired = DataHelper.getRandomMonth(5);
+        var monthExpired = DataHelper.getRandomMonth(-2);
         cardPage.cleanFields();
-        cardPage.fillCardPaymentForm(approvedCardNumber,monthExpired,currentYear,validOwnerName,validCode);
+        cardPage.fillCardPaymentForm(approvedCardNumber, monthExpired, currentYear, validOwnerName, validCode);
+        cardPage.errorCardTermValidity();
 
+    }
+
+    @Test
+    public void payWithACardWithTheWrongMonth() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var invalidMonth = DataHelper.getInvalidMonth();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, invalidMonth, validYear, validOwnerName, validCode);
+        cardPage.errorCardTermValidity();
+
+    }
+
+    @Test
+    public void payWithACardWithAnEmptyMonth() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var emptyMonth = DataHelper.getEmptyField();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, emptyMonth, validYear, validOwnerName, validCode);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void paymentByCardWithExpiredAnnualValidity() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var AnnualValidity = DataHelper.getRandomYear(-5);
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, AnnualValidity, validOwnerName, validCode);
+        cardPage.termValidityExpired();
+
+    }
+
+    @Test
+    public void cardPaymentWithEmptyYear() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var emptyYear = DataHelper.getEmptyField();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, emptyYear, validOwnerName, validCode);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void rusLanguageNamePaymentByCard() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var rusLanguageName = DataHelper.getRandomNameRus();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, rusLanguageName, validCode);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void digitsNameCardPayment() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var digitsName = DataHelper.getNumberName();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, digitsName, validCode);
+        cardPage.errorFormat();
+    }
+
+
+    @Test
+    public void specSymbolsNameCardPayment() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var specSymbolsName = DataHelper.getSpecialCharactersName();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, specSymbolsName, validCode);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void emptyNameCardPayment() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var emptyName = DataHelper.getEmptyField();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, emptyName, validCode);
+        cardPage.emptyField();
+    }
+
+    @Test
+    public void twoDigitCardPaymentCode() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var twoDigitCard = DataHelper.getNumberCVC(2);
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, twoDigitCard);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void oneDigitInTheCardPaymentCode() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var oneDigitInTheCard = DataHelper.getNumberCVC(1);
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, oneDigitInTheCard);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void emptyPaymentFieldInTheCardCode() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var emptyField = DataHelper.getEmptyField();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, emptyField);
+        cardPage.errorFormat();
+
+    }
+
+    @Test
+    public void  specSymbolsCodeCardPayment() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var specSymbolsCode = DataHelper.getSpecialCharactersName();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, specSymbolsCode);
+        cardPage.errorFormat();
+    }
+
+    @Test
+    public void emptyAllFieldsCardPayment() {
+        PaymentPage page = new PaymentPage();
+        page.paymentPage();
+        var cardPage = page.cardPayment();
+        var emptyCardNumber = DataHelper.getEmptyField();
+        var emptyMonth = DataHelper.getEmptyField();
+        var emptyYear = DataHelper.getEmptyField();
+        var emptyOwnerName = DataHelper.getEmptyField();
+        var emptyCode = DataHelper.getEmptyField();
+        cardPage.cleanFields();
+        cardPage.fillCardPaymentForm(emptyCardNumber, emptyMonth, emptyYear, emptyOwnerName, emptyCode);
+        cardPage.errorFormat();
+
+
+    }
 
 }
 
-}
+
 
 
