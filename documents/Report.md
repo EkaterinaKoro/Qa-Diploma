@@ -15,7 +15,7 @@
 
 #### Результаты автоматизированного тестирования
 
-![Описание изображения](https://cloud.mail.ru/public/ykGA/wXkbS9fSB)
+[Allure](https://cloud.mail.ru/public/ykGA/wXkbS9fSB "Allure")
 
 
 - Автотесты с позитивным результатом: 26 шт., что составляет 68,42 %; 
