@@ -7,7 +7,8 @@ import java.util.Locale;
 
 
 public class DataHelper {
-    private DataHelper(){}
+    private DataHelper() {
+    }
 
 
     @Value
@@ -28,7 +29,7 @@ public class DataHelper {
     }
 
     private static Faker faker = new Faker(new Locale("en"));
-    private  static Faker fakerRus = new Faker(new Locale("ru"));
+    private static Faker fakerRus = new Faker(new Locale("ru"));
 
     public static String getRandomCardNumber() {
         return faker.business().creditCardNumber();
@@ -39,6 +40,7 @@ public class DataHelper {
         int shortNumber = faker.random().nextInt(16);
         return faker.number().digits(shortNumber);
     }
+
     public static String getRandomMonth(int month) {
         return LocalDate.now().plusMonths(month).format(DateTimeFormatter.ofPattern("MM"));
     }
@@ -64,14 +66,17 @@ public class DataHelper {
     }
 
     public static String getNumberName() {
+
         return faker.number().digit();
     }
 
     public static String getNumberCVC(int code) {
+
         return faker.number().digits(code);
     }
 
     public static String getSpecialCharactersName() {
+
         return "&^^%&^%*&^";
     }
 
@@ -79,7 +84,7 @@ public class DataHelper {
         return "";
     }
 
+}
 
-    }
 
 

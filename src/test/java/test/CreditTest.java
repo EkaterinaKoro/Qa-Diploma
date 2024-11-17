@@ -48,7 +48,7 @@ public class CreditTest {
         creditPage.cleanFields();
         creditPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, validCode);
         creditPage.bankApprovedOperation();
-        Assertions.assertEquals("Approved", SQLHelper.getCreditPayment());
+        Assertions.assertEquals("APPROVED", SQLHelper.getCreditPayment());
 
     }
 

@@ -50,7 +50,7 @@ public class PaymentTest {
         cardPage.cleanFields();
         cardPage.fillCardPaymentForm(approvedCardNumber, validMonth, validYear, validOwnerName, validCode);
         cardPage.bankApprovedOperation();
-        Assertions.assertEquals("Approved", SQLHelper.getCardPayment());
+        Assertions.assertEquals("APPROVED", SQLHelper.getCardPayment());
 
     }
 

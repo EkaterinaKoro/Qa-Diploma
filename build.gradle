@@ -28,7 +28,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.18'
     implementation 'org.postgresql:postgresql:42.2.27'
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'commons-dbutils:commons-dbutils:1.8.1'
+    implementation 'commons-dbutils:commons-dbutils:1.7'
     implementation 'io.rest-assured:rest-assured:4.3.0'
     implementation 'com.codeborne:selenide:6.17.1'
 
