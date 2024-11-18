@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CardPage {
 
-    // Поля
+
     private final SelenideElement heading = $(withText("Оплата по карте"));
     private final SelenideElement cardNumberField = $("[placeholder='0000 0000 0000 0000']");
     private final SelenideElement monthField = $("[placeholder='08']");
@@ -22,7 +22,6 @@ public class CardPage {
     private final SelenideElement codeField = $("[placeholder='999']");
     private final SelenideElement contButton = $$(".button__content").findBy(text("Продолжить"));
 
-    //Ошибки
 
     private final SelenideElement errorFormat = $$(".input__inner").findBy(text("Неверный формат"));
     private final SelenideElement emptyField = $$(".input__inner").findBy(text("Поле обязательно для заполнения"));

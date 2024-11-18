@@ -20,8 +20,8 @@ public class CreditPage {
     private final SelenideElement bankDeclinedOperation = $$(".notification__content").findBy(text("Ошибка! Банк отказал в проведении операции."));
     private final SelenideElement bankApprovedOperation = $$(".notification__content").findBy(text("Операция одобрена Банком."));
     public SelenideElement ownerField = $$(".input__inner").findBy(text("Владелец")).$(".input__control");
-    ;
-    //Ошибки
+
+
     public SelenideElement codeField = $("[placeholder='999']");
     public SelenideElement contButton = $$(".button__content").find(Condition.exactText("Продолжить"));
     private SelenideElement heading = $(withText("Кредит по данным карты"));
