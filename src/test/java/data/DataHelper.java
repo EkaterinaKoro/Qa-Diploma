@@ -1,21 +1,18 @@
 package data;
+
 import com.github.javafaker.Faker;
 import lombok.Value;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
 public class DataHelper {
+    private static Faker faker = new Faker(new Locale("en"));
+    private static Faker fakerRus = new Faker(new Locale("ru"));
+
     private DataHelper() {
-    }
-
-
-    @Value
-    public static class CardInfo {
-        public String cardNumber;
-        public String Status;
-
     }
 
     public static CardInfo getCardApproved() {
@@ -27,9 +24,6 @@ public class DataHelper {
 
         return new CardInfo("4444 4444 4444 4442", "DECLINED");
     }
-
-    private static Faker faker = new Faker(new Locale("en"));
-    private static Faker fakerRus = new Faker(new Locale("ru"));
 
     public static String getRandomCardNumber() {
         return faker.business().creditCardNumber();
@@ -82,6 +76,13 @@ public class DataHelper {
 
     public static String getEmptyField() {
         return "";
+    }
+
+    @Value
+    public static class CardInfo {
+        public String cardNumber;
+        public String Status;
+
     }
 
 }

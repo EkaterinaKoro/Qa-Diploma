@@ -2,8 +2,11 @@ package page;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
+
 import java.time.Duration;
-import static com.codeborne.selenide.Condition.*;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -66,20 +69,21 @@ public class CardPage {
     public void errorCardTermValidity() {
 
         errorCardTermValidity.shouldBe(visible);
-}
-public void termValidityExpired() {
-
-    termValidityExpired.shouldBe(visible);
-}
-
-public void cleanFields() {
-    cardNumberField.doubleClick().sendKeys(Keys.BACK_SPACE);
-    monthField.doubleClick().sendKeys(Keys.BACK_SPACE);
-    yearField.doubleClick().sendKeys(Keys.BACK_SPACE);
-    ownerField.doubleClick().sendKeys(Keys.BACK_SPACE);
-    codeField.doubleClick().sendKeys(Keys.BACK_SPACE);
-}
-
-
     }
+
+    public void termValidityExpired() {
+
+        termValidityExpired.shouldBe(visible);
+    }
+
+    public void cleanFields() {
+        cardNumberField.doubleClick().sendKeys(Keys.BACK_SPACE);
+        monthField.doubleClick().sendKeys(Keys.BACK_SPACE);
+        yearField.doubleClick().sendKeys(Keys.BACK_SPACE);
+        ownerField.doubleClick().sendKeys(Keys.BACK_SPACE);
+        codeField.doubleClick().sendKeys(Keys.BACK_SPACE);
+    }
+
+
+}
 

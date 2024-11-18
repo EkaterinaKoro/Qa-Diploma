@@ -8,8 +8,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 
-
-
 public class PaymentPage {
 
     private SelenideElement heading = $(withText("Путешествие дня"));

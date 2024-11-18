@@ -226,7 +226,7 @@ public class CreditTest {
     }
 
     @Test
-    public void  specSymbolsCodeCreditCardPayment() {
+    public void specSymbolsCodeCreditCardPayment() {
         PaymentPage page = new PaymentPage();
         page.paymentPage();
         var creditPage = page.creditPayment();
