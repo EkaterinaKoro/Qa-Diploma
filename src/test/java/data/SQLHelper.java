@@ -9,10 +9,12 @@ import java.sql.DriverManager;
 
 
 public class SQLHelper {
-    private static String url = System.getProperty("db.url");
-    private static String user = System.getProperty("db.user");
-    private static String password = System.getProperty("db.password");
-    private static QueryRunner runner = new QueryRunner();
+
+
+    private static final String url = System.getProperty("db.url");
+    private static final String user = System.getProperty("db.user");
+    private static final String pass  = System.getProperty("db.password");
+    private static final QueryRunner runner = new QueryRunner();
 
 
     private SQLHelper() {
@@ -21,17 +23,16 @@ public class SQLHelper {
 
     @SneakyThrows
     private static Connection getConnection() {
-        return DriverManager.getConnection(System.getProperty("db.url"), "app", "pass");
+        return DriverManager.getConnection(url, user, pass);
 
     }
 
     @SneakyThrows
-    public static void cleanBase() {
+    public static void сleanBase() {
         var connection = getConnection();
         runner.execute(connection, "DELETE FROM credit_request_entity");
         runner.execute(connection, "DELETE FROM order_entity");
         runner.execute(connection, "DELETE FROM payment_entity");
-
 
     }
 

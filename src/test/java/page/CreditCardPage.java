@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class CreditPage {
+public class CreditCardPage {
     private final SelenideElement errorFormat = $$(".input__inner").findBy(text("Неверный формат"));
     private final SelenideElement emptyField = $$(".input__inner").findBy(text("Поле обязательно для заполнения"));
     private final SelenideElement errorCardTermValidity = $$(".input__inner").findBy(text("Неверно указан срок действия карты"));
@@ -29,7 +29,7 @@ public class CreditPage {
     private SelenideElement monthField = $("[placeholder='08']");
     private SelenideElement yearField = $("[placeholder='22']");
 
-    public CreditPage() {
+    public CreditCardPage() {
 
         heading.shouldBe(visible);
     }

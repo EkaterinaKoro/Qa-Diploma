@@ -8,23 +8,23 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class PaymentPage {
+public class PaymentTypesPage {
 
     private SelenideElement heading = $(withText("Путешествие дня"));
     private SelenideElement buyButton = $(withText("Купить"));
     private SelenideElement creditButton = $(withText("Купить в кредит"));
 
-    public void paymentPage() {
+    public void paymentTypesPage() {
         heading.shouldBe(visible);
 
     }
-    public CardPage cardPayment() {
+    public DebitCardPage cardPayment() {
     buyButton.click();
-    return new CardPage();
+    return new DebitCardPage();
     }
 
-    public CreditPage creditPayment() {
+    public CreditCardPage creditPayment() {
         creditButton.click();
-        return new CreditPage();
+        return new CreditCardPage();
     }
 }

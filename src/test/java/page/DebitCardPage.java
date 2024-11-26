@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class CardPage {
+public class DebitCardPage {
 
 
     private final SelenideElement heading = $(withText("Оплата по карте"));
@@ -31,7 +31,7 @@ public class CardPage {
     private final SelenideElement bankApprovedOperation = $$(".notification__content").findBy(text("Операция одобрена Банком."));
 
 
-    public CardPage() {
+    public DebitCardPage() {
 
         heading.shouldBe(visible);
     }
